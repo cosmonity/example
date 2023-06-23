@@ -19,3 +19,6 @@ jobs:
       - name: Tests
         run: |
           make test
+      - name: Integration Tests
+        run: |
+          make test-integration

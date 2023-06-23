@@ -3,15 +3,15 @@ module integration
 go 1.20
 
 require (
-	github.com/cosmos/cosmos-sdk v0.50.0-alpha.0.0.20230622062740-e61ce3c26e2a
-	github.com/cosmosregistry/example v0.0.0-20230616185829-8d14ca9190b0
+	cosmossdk.io/api v0.4.3-0.20230620040119-e078f1a49e8b
+	cosmossdk.io/core v0.8.0
+	github.com/cosmos/cosmos-sdk v0.50.0-alpha.0.0.20230623113103-02a0f59000a6
+	github.com/cosmosregistry/example v1.0.0
 	github.com/stretchr/testify v1.8.4
 )
 
 require (
-	cosmossdk.io/api v0.4.3-0.20230620040119-e078f1a49e8b // indirect
 	cosmossdk.io/collections v0.2.0 // indirect
-	cosmossdk.io/core v0.8.0 // indirect
 	cosmossdk.io/depinject v1.0.0-alpha.3 // indirect
 	cosmossdk.io/errors v1.0.0-beta.7.0.20230524212735-6cabb6aa5741 // indirect
 	cosmossdk.io/log v1.1.0 // indirect
@@ -151,3 +151,6 @@ require (
 	pgregory.net/rapid v0.6.2 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
+
+// always test the latest module code.
+replace github.com/cosmosregistry/example => ../

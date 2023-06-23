@@ -10,6 +10,12 @@ test:
 	@echo "--> Running tests"
 	go test -v ./...
 
+test-integration:
+	@echo "--> Running integration tests"
+	cd integration && go test -v ./...
+
+.PHONY: test test-integration
+
 ###################
 ###  Protobuf  ####
 ###################
@@ -30,6 +36,8 @@ proto-format:
 
 proto-lint:
 	@$(protoImage) buf lint
+
+.PHONY: proto-all proto-gen proto-format proto-lint
 
 ##################
 ###  Linting  ####
