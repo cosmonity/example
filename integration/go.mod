@@ -5,6 +5,7 @@ go 1.20
 require (
 	cosmossdk.io/api v0.4.3-0.20230620040119-e078f1a49e8b
 	cosmossdk.io/core v0.8.0
+	cosmossdk.io/depinject v1.0.0-alpha.3
 	cosmossdk.io/log v1.1.0
 	github.com/cosmos/cosmos-sdk v0.50.0-alpha.0.0.20230623113103-02a0f59000a6
 	github.com/cosmosregistry/example v1.0.0
@@ -13,7 +14,6 @@ require (
 
 require (
 	cosmossdk.io/collections v0.2.0 // indirect
-	cosmossdk.io/depinject v1.0.0-alpha.3 // indirect
 	cosmossdk.io/errors v1.0.0-beta.7.0.20230524212735-6cabb6aa5741 // indirect
 	cosmossdk.io/math v1.0.1 // indirect
 	cosmossdk.io/store v0.1.0-alpha.1.0.20230606190835-3e18f4088b2c // indirect

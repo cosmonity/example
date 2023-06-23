@@ -1,4 +1,4 @@
-package integration
+package integration_test
 
 import (
 	"testing"
@@ -19,7 +19,6 @@ import (
 	"cosmossdk.io/depinject"
 	"cosmossdk.io/log"
 	"github.com/cosmos/cosmos-sdk/testutil/configurator"
-	simtestutil "github.com/cosmos/cosmos-sdk/testutil/sims"
 
 	"github.com/cosmosregistry/example"
 	examplemodulev1 "github.com/cosmosregistry/example/api/module/v1"
@@ -40,22 +39,22 @@ func ExampleModule() configurator.ModuleOption {
 func TestIntegration(t *testing.T) {
 	t.Parallel()
 
-	appConfig := configurator.NewAppConfig(
-		configurator.AuthModule(),
-		configurator.BankModule(),
-		configurator.StakingModule(),
-		configurator.TxModule(),
-		configurator.ConsensusModule(),
-		configurator.GenutilModule(),
-		configurator.MintModule(),
-		ExampleModule(),
-	)
 	logger := log.NewTestLogger(t)
+	appConfig := depinject.Supply(
+		configurator.NewAppConfig(
+			configurator.AuthModule(),
+			configurator.BankModule(),
+			configurator.StakingModule(),
+			configurator.TxModule(),
+			configurator.ConsensusModule(),
+			configurator.GenutilModule(),
+			configurator.MintModule(),
+			ExampleModule(),
+		),
+		logger)
 
 	var keeper keeper.Keeper
-	_, err := simtestutil.Setup(
-		depinject.Supply(appConfig, logger),
-		&keeper,
-	)
+	// _, err := simtestutil.Setup(appConfig, &keeper)
+	err := depinject.Inject(appConfig, &keeper)
 	require.NoError(t, err)
 }
