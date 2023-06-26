@@ -26,7 +26,7 @@ type testFixture struct {
 
 func initFixture(t *testing.T) *testFixture {
 	encCfg := moduletestutil.MakeTestEncodingConfig()
-	key := storetypes.NewKVStoreKey(example.StoreKey)
+	key := storetypes.NewKVStoreKey(example.ModuleName)
 	testCtx := testutil.DefaultContextWithDB(t, key, storetypes.NewTransientStoreKey("transient_test"))
 	storeService := runtime.NewKVStoreService(key)
 	addrs := simtestutil.CreateIncrementalAccounts(3)

@@ -2,12 +2,7 @@ package example
 
 import "cosmossdk.io/collections"
 
-const (
-	ModuleName = "example"
-
-	// StoreKey is the default store key for mint
-	StoreKey = ModuleName
-)
+const ModuleName = "example"
 
 var (
 	ParamsKey  = collections.NewPrefix(0)
