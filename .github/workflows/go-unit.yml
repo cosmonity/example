@@ -5,8 +5,7 @@ on:
       - main
   pull_request:
 jobs:
-  build:
-    name: Go CI
+  tests:
     runs-on: ubuntu-latest
     steps:
       - name: Check out source
