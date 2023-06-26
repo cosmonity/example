@@ -153,4 +153,4 @@ require (
 )
 
 // always test the latest module code.
-replace github.com/cosmosregistry/example => ../
+replace github.com/cosmosregistry/example => ../.
