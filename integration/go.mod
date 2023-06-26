@@ -1,4 +1,4 @@
-module integration
+module github.com/cosmosregistry/example/integration
 
 go 1.20
 
@@ -7,7 +7,7 @@ require (
 	cosmossdk.io/core v0.8.0
 	cosmossdk.io/depinject v1.0.0-alpha.3
 	cosmossdk.io/log v1.1.0
-	github.com/cosmos/cosmos-sdk v0.50.0-alpha.0.0.20230623113103-02a0f59000a6
+	github.com/cosmos/cosmos-sdk v0.50.0-alpha.0.0.20230626194453-a5b6ce7c3f73
 	github.com/cosmosregistry/example v1.0.0
 	github.com/stretchr/testify v1.8.4
 )

@@ -12,7 +12,7 @@ test:
 
 test-integration:
 	@echo "--> Running integration tests"
-	cd integration && go test -v ./...
+	cd integration; go test -v ./...
 
 .PHONY: test test-integration
 

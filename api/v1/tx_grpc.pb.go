@@ -4,7 +4,7 @@
 // - protoc             (unknown)
 // source: cosmosregistry/example/v1/tx.proto
 
-package example
+package examplev1
 
 import (
 	context "context"
