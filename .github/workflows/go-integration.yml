@@ -18,4 +18,5 @@ jobs:
       - name: Tests
         run: |
           cd integration
+          go mod tidy
           go test -v ./... -count=1
