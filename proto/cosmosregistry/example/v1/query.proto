@@ -3,7 +3,7 @@ package cosmosregistry.example.v1;
 
 option go_package = "github.com/cosmosregistry/example";
 
-import "cosmosregistry/example/v1/example.proto";
+import "cosmosregistry/example/v1/types.proto";
 import "google/api/annotations.proto";
 import "cosmos/query/v1/query.proto";
 import "amino/amino.proto";
