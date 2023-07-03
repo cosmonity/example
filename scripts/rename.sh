@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
+# Usage MODULE_NAME=username/repo ./scripts/rename.sh
+
 if [[ -z $MODULE_NAME ]]; then
     echo "MODULE_NAME must be set."
     exit 1
 fi
+
+IFS='/' read -ra PARTS <<< "$MODULE_NAME"
+USERNAME="${PARTS[0]}"
 
 # remove all generated proto files
 find . -type f -name "*.pb.go" -delete
@@ -13,6 +18,7 @@ find . -type f -name "*.pulsar.go" -delete
 go mod edit -module github.com/$MODULE_NAME
 find . -not -path './.*' -type f -exec sed -i -e "s,cosmosregistry/example,$MODULE_NAME,g" {} \;
 find . -name '*.proto' -type f -exec sed -i -e "s,cosmosregistry.example,$(echo "$MODULE_NAME" | tr '/' '.'),g" {} \;
+find . -name 'protocgen.sh' -type f -exec sed -i -e "s,rm -rf github.com cosmosregistry,rm -rf github.com $USERNAME,g" {} \;
 
 # rename directory
 mkdir -p proto/$MODULE_NAME
@@ -23,4 +29,4 @@ rm -rf proto/cosmosregistry
 make proto-gen
 
 # removes itself
-# rm scripts/rename.sh
+rm scripts/rename.sh
