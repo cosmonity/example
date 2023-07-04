@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	cosmossdk.io/api v0.5.0
-	cosmossdk.io/collections v0.2.0
+	cosmossdk.io/collections v0.3.0
 	cosmossdk.io/core v0.9.0
 	cosmossdk.io/depinject v1.0.0-alpha.3
 	cosmossdk.io/store v0.1.0-alpha.1.0.20230606190835-3e18f4088b2c
@@ -149,6 +149,6 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools/v3 v3.4.0 // indirect
 	nhooyr.io/websocket v1.8.6 // indirect
-	pgregory.net/rapid v0.6.2 // indirect
+	pgregory.net/rapid v1.0.0 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
