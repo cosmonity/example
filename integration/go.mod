@@ -3,7 +3,7 @@ module github.com/cosmosregistry/example/integration
 go 1.20
 
 require (
-	cosmossdk.io/api v0.5.0
+	cosmossdk.io/api v0.6.0
 	cosmossdk.io/core v0.9.0
 	cosmossdk.io/depinject v1.0.0-alpha.3
 	cosmossdk.io/log v1.1.0
