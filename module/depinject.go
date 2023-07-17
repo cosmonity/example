@@ -53,7 +53,7 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 	}
 
 	k := keeper.NewKeeper(in.Cdc, in.AddressCodec, in.StoreService, authority.String())
-	m := NewAppModule(in.Cdc, k)
+	m := NewAppModule(k)
 
 	return ModuleOutputs{Module: m, Keeper: k}
 }
