@@ -38,7 +38,8 @@ func initFixture(t *testing.T) *testFixture {
 	source, err := genesis.SourceFromRawJSON([]byte(`{"counter":[],"params":[]}`))
 	require.NoError(t, err)
 
-	k.Schema.InitGenesis(testCtx.Ctx, source)
+	err = k.Schema.InitGenesis(testCtx.Ctx, source)
+	require.NoError(t, err)
 
 	return &testFixture{
 		ctx:         testCtx.Ctx,
