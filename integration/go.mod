@@ -155,3 +155,6 @@ require (
 
 // always test the latest module code.
 replace github.com/cosmosregistry/example => ../.
+
+// todo to delete before merge
+replace cosmossdk.io/collections => cosmossdk.io/collections v0.3.1-0.20230717091803-0ce499068900

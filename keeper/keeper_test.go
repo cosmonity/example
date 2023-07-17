@@ -35,7 +35,7 @@ func initFixture(t *testing.T) *testFixture {
 
 	k := keeper.NewKeeper(encCfg.Codec, addresscodec.NewBech32Codec("cosmos"), storeService, addrs[0].String())
 
-	source, err := genesis.SourceFromRawJSON([]byte(`{}`))
+	source, err := genesis.SourceFromRawJSON([]byte(`{"counter":[],"params":[]}`))
 	require.NoError(t, err)
 
 	k.Schema.InitGenesis(testCtx.Ctx, source)
