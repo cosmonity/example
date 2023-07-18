@@ -157,4 +157,4 @@ require (
 replace github.com/cosmosregistry/example => ../.
 
 // todo to delete before merge
-replace cosmossdk.io/collections => cosmossdk.io/collections v0.3.1-0.20230717091803-0ce499068900
+replace cosmossdk.io/collections => cosmossdk.io/collections v0.3.1-0.20230718212709-0ad5188bfb60

@@ -153,4 +153,4 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace cosmossdk.io/collections => cosmossdk.io/collections v0.3.1-0.20230717091803-0ce499068900
+replace cosmossdk.io/collections => cosmossdk.io/collections v0.3.1-0.20230718212709-0ad5188bfb60
