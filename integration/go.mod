@@ -7,7 +7,7 @@ require (
 	cosmossdk.io/core v0.9.0
 	cosmossdk.io/depinject v1.0.0-alpha.3
 	cosmossdk.io/log v1.1.1-0.20230704160919-88f2c830b0ca
-	github.com/cosmos/cosmos-sdk v0.50.0-alpha.1.0.20230713184559-d4284d7f14e4
+	github.com/cosmos/cosmos-sdk v0.50.0-beta.0
 	github.com/cosmosregistry/example v1.0.0
 	github.com/stretchr/testify v1.8.4
 )
@@ -33,7 +33,7 @@ require (
 	github.com/cockroachdb/pebble v0.0.0-20230711190327-88bbab59ff4f // indirect
 	github.com/cockroachdb/redact v1.1.5 // indirect
 	github.com/cockroachdb/tokenbucket v0.0.0-20230613231145-182959a1fad6 // indirect
-	github.com/cometbft/cometbft v0.38.0-rc2 // indirect
+	github.com/cometbft/cometbft v0.38.0-rc3 // indirect
 	github.com/cometbft/cometbft-db v0.8.0 // indirect
 	github.com/cosmos/btcutil v1.0.5 // indirect
 	github.com/cosmos/cosmos-db v1.0.0 // indirect
