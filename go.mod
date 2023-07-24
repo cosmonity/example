@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	cosmossdk.io/api v0.7.0
-	cosmossdk.io/collections v0.3.0
+	cosmossdk.io/collections v0.3.1-0.20230724154654-21020740248b
 	cosmossdk.io/core v0.9.0
 	cosmossdk.io/depinject v1.0.0-alpha.3
 	cosmossdk.io/store v1.0.0-alpha.1
@@ -152,5 +152,3 @@ require (
 	pgregory.net/rapid v1.0.0 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
-
-replace cosmossdk.io/collections => cosmossdk.io/collections v0.3.1-0.20230718212709-0ad5188bfb60
