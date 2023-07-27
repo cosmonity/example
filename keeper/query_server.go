@@ -45,6 +45,10 @@ func (qs queryServer) Counter(ctx context.Context, req *example.QueryCounterRequ
 func (qs queryServer) Params(ctx context.Context, req *example.QueryParamsRequest) (*example.QueryParamsResponse, error) {
 	params, err := qs.k.Params.Get(ctx)
 	if err != nil {
+		if errors.Is(err, collections.ErrNotFound) {
+			return &example.QueryParamsResponse{Params: example.Params{}}, nil
+		}
+
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
