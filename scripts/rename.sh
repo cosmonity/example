@@ -9,7 +9,7 @@ fi
 
 IFS='/' read -ra PARTS <<< "$MODULE_NAME"
 USERNAME="${PARTS[0]}"
-REPO="${PARTS[-1]}"
+REPO="${PARTS[1]}"
 
 # remove all generated proto files
 find . -type f -name "*.pb.go" -delete
