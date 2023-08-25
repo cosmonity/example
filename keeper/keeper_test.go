@@ -32,7 +32,10 @@ func initFixture(t *testing.T) *testFixture {
 	addrs := simtestutil.CreateIncrementalAccounts(3)
 
 	k := keeper.NewKeeper(encCfg.Codec, addresscodec.NewBech32Codec("cosmos"), storeService, addrs[0].String())
-	k.InitGenesis(testCtx.Ctx, example.NewGenesisState())
+	err := k.InitGenesis(testCtx.Ctx, example.NewGenesisState())
+	if err != nil {
+		panic(err)
+	}
 
 	return &testFixture{
 		ctx:         testCtx.Ctx,
