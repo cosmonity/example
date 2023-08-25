@@ -12,8 +12,11 @@ func (k *Keeper) InitGenesis(ctx context.Context, data *example.GenesisState) er
 		return err
 	}
 
-	// Here you need to import all your module state.
-	// Until core genesis is finished, which will do that for you.
+	for _, counter := range data.Counters {
+		if err := k.Counter.Set(ctx, counter.Address, counter.Count); err != nil {
+			return err
+		}
+	}
 
 	return nil
 }
@@ -25,10 +28,20 @@ func (k *Keeper) ExportGenesis(ctx context.Context) (*example.GenesisState, erro
 		return nil, err
 	}
 
-	// Here you need to export all your module state.
-	// Until core genesis is finished, which will do that for you.
+	var counters []example.Counter
+	if err := k.Counter.Walk(ctx, nil, func(address string, count uint64) (bool, error) {
+		counters = append(counters, example.Counter{
+			Address: address,
+			Count:   count,
+		})
+
+		return false, nil
+	}); err != nil {
+		return nil, err
+	}
 
 	return &example.GenesisState{
-		Params: params,
+		Params:   params,
+		Counters: counters,
 	}, nil
 }
