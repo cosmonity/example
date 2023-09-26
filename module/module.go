@@ -48,9 +48,8 @@ func NewAppModuleBasic(m AppModule) module.AppModuleBasic {
 func (AppModule) Name() string { return example.ModuleName }
 
 // RegisterLegacyAminoCodec registers the example module's types on the LegacyAmino codec.
-func (AppModule) RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
-	example.RegisterLegacyAminoCodec(cdc)
-}
+// New modules do not need to support Amino.
+func (AppModule) RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {}
 
 // RegisterGRPCGatewayRoutes registers the gRPC Gateway routes for the example module.
 func (AppModule) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *gwruntime.ServeMux) {
