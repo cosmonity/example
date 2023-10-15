@@ -9,6 +9,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
+	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/cosmosregistry/example"
 )
 
@@ -39,6 +40,25 @@ func (qs queryServer) Counter(ctx context.Context, req *example.QueryCounterRequ
 	}
 
 	return &example.QueryCounterResponse{Counter: counter}, nil
+}
+
+// Counters defines the handler for the Query/Counters RPC method.
+func (qs queryServer) Counters(ctx context.Context, req *example.QueryCountersRequest) (*example.QueryCountersResponse, error) {
+	counters, pageRes, err := query.CollectionPaginate(
+		ctx,
+		qs.k.Counter,
+		req.Pagination,
+		func(key string, value uint64) (*example.Counter, error) {
+			return &example.Counter{
+				Address: key,
+				Count:   value,
+			}, nil
+		})
+	if err != nil {
+		return nil, err
+	}
+
+	return &example.QueryCountersResponse{Counters: counters, Pagination: pageRes}, nil
 }
 
 // Params defines the handler for the Query/Params RPC method.
