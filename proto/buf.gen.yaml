@@ -18,3 +18,6 @@ plugins:
   - name: go-cosmos-orm
     out: ..
     opt: paths=source_relative,Mcosmos/app/v1alpha1/module.proto=cosmossdk.io/api/cosmos/app/v1alpha1
+  - name: grpc-gateway
+    out: ..
+    opt: paths=source_relative

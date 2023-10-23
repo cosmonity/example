@@ -9,6 +9,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 
 	"github.com/cosmosregistry/example"
+	examplev1 "github.com/cosmosregistry/example/api/v1"
 )
 
 type Keeper struct {
@@ -21,7 +22,7 @@ type Keeper struct {
 
 	// state management
 	Schema  collections.Schema
-	Params  collections.Item[example.Params]
+	Params  collections.Item[examplev1.Params]
 	Counter collections.Map[string, uint64]
 }
 
@@ -36,7 +37,7 @@ func NewKeeper(cdc codec.BinaryCodec, addressCodec address.Codec, storeService s
 		cdc:          cdc,
 		addressCodec: addressCodec,
 		authority:    authority,
-		Params:       collections.NewItem(sb, example.ParamsKey, "params", codec.CollValue[example.Params](cdc)),
+		Params:       collections.NewItem(sb, example.ParamsKey, "params", codec.CollValue[examplev1.Params](cdc)),
 		Counter:      collections.NewMap(sb, example.CounterKey, "counter", collections.StringKey, collections.Uint64Value),
 	}
 

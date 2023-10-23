@@ -4,14 +4,15 @@ import (
 	"testing"
 
 	"github.com/cosmosregistry/example"
+	examplev1 "github.com/cosmosregistry/example/api/v1"
 	"github.com/stretchr/testify/require"
 )
 
 func TestInitGenesis(t *testing.T) {
 	fixture := initFixture(t)
 
-	data := &example.GenesisState{
-		Counters: []example.Counter{
+	data := &examplev1.GenesisState{
+		Counters: []*examplev1.Counter{
 			{
 				Address: fixture.addrs[0].String(),
 				Count:   5,
@@ -35,7 +36,7 @@ func TestInitGenesis(t *testing.T) {
 func TestExportGenesis(t *testing.T) {
 	fixture := initFixture(t)
 
-	_, err := fixture.msgServer.IncrementCounter(fixture.ctx, &example.MsgIncrementCounter{
+	_, err := fixture.msgServer.IncrementCounter(fixture.ctx, &examplev1.MsgIncrementCounter{
 		Sender: fixture.addrs[0].String(),
 	})
 	require.NoError(t, err)

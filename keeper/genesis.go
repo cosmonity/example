@@ -3,12 +3,12 @@ package keeper
 import (
 	"context"
 
-	"github.com/cosmosregistry/example"
+	examplev1 "github.com/cosmosregistry/example/api/v1"
 )
 
 // InitGenesis initializes the module state from a genesis state.
-func (k *Keeper) InitGenesis(ctx context.Context, data *example.GenesisState) error {
-	if err := k.Params.Set(ctx, data.Params); err != nil {
+func (k *Keeper) InitGenesis(ctx context.Context, data *examplev1.GenesisState) error {
+	if err := k.Params.Set(ctx, *data.Params); err != nil { // TODO: not good.
 		return err
 	}
 
@@ -22,15 +22,15 @@ func (k *Keeper) InitGenesis(ctx context.Context, data *example.GenesisState) er
 }
 
 // ExportGenesis exports the module state to a genesis state.
-func (k *Keeper) ExportGenesis(ctx context.Context) (*example.GenesisState, error) {
+func (k *Keeper) ExportGenesis(ctx context.Context) (*examplev1.GenesisState, error) {
 	params, err := k.Params.Get(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	var counters []example.Counter
+	var counters []*examplev1.Counter
 	if err := k.Counter.Walk(ctx, nil, func(address string, count uint64) (bool, error) {
-		counters = append(counters, example.Counter{
+		counters = append(counters, &examplev1.Counter{
 			Address: address,
 			Count:   count,
 		})
@@ -40,8 +40,8 @@ func (k *Keeper) ExportGenesis(ctx context.Context) (*example.GenesisState, erro
 		return nil, err
 	}
 
-	return &example.GenesisState{
-		Params:   params,
+	return &examplev1.GenesisState{
+		Params:   &params,
 		Counters: counters,
 	}, nil
 }

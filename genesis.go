@@ -1,14 +1,16 @@
 package example
 
+import examplev1 "github.com/cosmosregistry/example/api/v1"
+
 // NewGenesisState creates a new genesis state with default values.
-func NewGenesisState() *GenesisState {
-	return &GenesisState{
+func NewGenesisState() *examplev1.GenesisState {
+	return &examplev1.GenesisState{
 		Params: DefaultParams(),
 	}
 }
 
-// Validate performs basic genesis state validation returning an error upon any
-func (gs *GenesisState) Validate() error {
+// ValidateGenesis performs basic genesis state validation returning an error upon any
+func ValidateGenesis(gs *examplev1.GenesisState) error {
 	uniq := make(map[string]bool)
 	for _, counter := range gs.Counters {
 		if _, ok := uniq[counter.Address]; ok {
@@ -18,7 +20,7 @@ func (gs *GenesisState) Validate() error {
 		uniq[counter.Address] = true
 	}
 
-	if err := gs.Params.Validate(); err != nil {
+	if err := ValidateParams(gs.Params); err != nil {
 		return err
 	}
 

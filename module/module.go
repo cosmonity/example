@@ -15,6 +15,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 
 	"github.com/cosmosregistry/example"
+	examplev1 "github.com/cosmosregistry/example/api/v1"
 	"github.com/cosmosregistry/example/keeper"
 )
 
@@ -53,7 +54,7 @@ func (AppModule) RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {}
 
 // RegisterGRPCGatewayRoutes registers the gRPC Gateway routes for the example module.
 func (AppModule) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *gwruntime.ServeMux) {
-	if err := example.RegisterQueryHandlerClient(context.Background(), mux, example.NewQueryClient(clientCtx)); err != nil {
+	if err := examplev1.RegisterQueryHandlerClient(context.Background(), mux, examplev1.NewQueryClient(clientCtx)); err != nil {
 		panic(err)
 	}
 }
@@ -68,8 +69,8 @@ func (AppModule) ConsensusVersion() uint64 { return ConsensusVersion }
 
 // RegisterServices registers a gRPC query service to respond to the module-specific gRPC queries.
 func (am AppModule) RegisterServices(cfg module.Configurator) {
-	example.RegisterMsgServer(cfg.MsgServer(), keeper.NewMsgServerImpl(am.keeper))
-	example.RegisterQueryServer(cfg.QueryServer(), keeper.NewQueryServerImpl(am.keeper))
+	examplev1.RegisterMsgServer(cfg.MsgServer(), keeper.NewMsgServerImpl(am.keeper))
+	examplev1.RegisterQueryServer(cfg.QueryServer(), keeper.NewQueryServerImpl(am.keeper))
 
 	// Register in place module state migration migrations
 	// m := keeper.NewMigrator(am.keeper)
@@ -85,18 +86,18 @@ func (AppModule) DefaultGenesis(cdc codec.JSONCodec) json.RawMessage {
 
 // ValidateGenesis performs genesis state validation for the circuit module.
 func (AppModule) ValidateGenesis(cdc codec.JSONCodec, _ client.TxEncodingConfig, bz json.RawMessage) error {
-	var data example.GenesisState
+	var data examplev1.GenesisState
 	if err := cdc.UnmarshalJSON(bz, &data); err != nil {
 		return fmt.Errorf("failed to unmarshal %s genesis state: %w", example.ModuleName, err)
 	}
 
-	return data.Validate()
+	return example.ValidateGenesis(&data)
 }
 
 // InitGenesis performs genesis initialization for the example module.
 // It returns no validator updates.
 func (am AppModule) InitGenesis(ctx sdk.Context, cdc codec.JSONCodec, data json.RawMessage) {
-	var genesisState example.GenesisState
+	var genesisState examplev1.GenesisState
 	cdc.MustUnmarshalJSON(data, &genesisState)
 
 	if err := am.keeper.InitGenesis(ctx, &genesisState); err != nil {

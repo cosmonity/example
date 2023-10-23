@@ -12,14 +12,15 @@ import (
 	moduletestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
 
 	"github.com/cosmosregistry/example"
+	examplev1 "github.com/cosmosregistry/example/api/v1"
 	"github.com/cosmosregistry/example/keeper"
 )
 
 type testFixture struct {
 	ctx         sdk.Context
 	k           keeper.Keeper
-	msgServer   example.MsgServer
-	queryServer example.QueryServer
+	msgServer   examplev1.MsgServer
+	queryServer examplev1.QueryServer
 
 	addrs []sdk.AccAddress
 }
