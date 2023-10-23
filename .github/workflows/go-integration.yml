@@ -1,4 +1,4 @@
-name: Integration tests
+name: Integration/E2E tests
 on:
   push:
     branches:
@@ -17,5 +17,5 @@ jobs:
           check-latest: true
       - name: Tests
         run: |
-          cd integration
+          cd tests
           go test -v ./... -count=1
