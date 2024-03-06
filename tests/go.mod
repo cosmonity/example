@@ -11,7 +11,7 @@ require (
 	cosmossdk.io/log v1.3.1
 	github.com/cosmos/cosmos-sdk v0.50.4
 	github.com/cosmosregistry/example v1.0.0
-	github.com/stretchr/testify v1.8.4
+	github.com/stretchr/testify v1.9.0
 )
 
 require (
