@@ -5,9 +5,10 @@ import (
 	"cosmossdk.io/core/appmodule"
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/depinject"
+	"cosmossdk.io/depinject/appconfig"
 
+	authtypes "cosmossdk.io/x/auth/types"
 	"github.com/cosmos/cosmos-sdk/codec"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
 	modulev1 "github.com/cosmosregistry/example/api/module/v1"
 	"github.com/cosmosregistry/example/keeper"
@@ -22,9 +23,9 @@ func (am AppModule) IsOnePerModuleType() {}
 func (am AppModule) IsAppModule() {}
 
 func init() {
-	appmodule.Register(
+	appconfig.Register(
 		&modulev1.Module{},
-		appmodule.Provide(ProvideModule),
+		appconfig.Provide(ProvideModule),
 	)
 }
 
