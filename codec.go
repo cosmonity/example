@@ -2,14 +2,14 @@ package example
 
 import (
 	"cosmossdk.io/core/registry"
+	"cosmossdk.io/core/transaction"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/msgservice"
 )
 
 // RegisterInterfaces registers the interfaces types with the interface registry.
 func RegisterInterfaces(registry registry.InterfaceRegistrar) {
-	registry.RegisterImplementations((*sdk.Msg)(nil),
+	registry.RegisterImplementations((*transaction.Msg)(nil),
 		&MsgUpdateParams{},
 		&MsgIncrementCounter{},
 	)
