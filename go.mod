@@ -19,7 +19,8 @@ require (
 	cosmossdk.io/collections v0.4.1-0.20240802064046-23fac2f1b8ab // main
 	cosmossdk.io/core v0.12.1-0.20240802064046-23fac2f1b8ab // main
 	cosmossdk.io/depinject v1.0.0
-	cosmossdk.io/errors v1.0.1
+	cosmossdk.io/errors v1.0.1 // indirect
+	cosmossdk.io/errors/v2 v2.0.0-20240808151044-b0ab3aaac4dd
 	cosmossdk.io/store v1.1.1-0.20240418092142-896cdf1971bc
 	github.com/cosmos/cosmos-proto v1.0.0-beta.5
 	github.com/cosmos/cosmos-sdk v0.52.0
