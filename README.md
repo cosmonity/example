@@ -1,3 +1,6 @@
+> This is an example module for the v0.52.x Cosmos SDK.
+> Looking for the v0.50.x example? Check the [v0.50.x branch](https://github.com/cosmosregistry/example/tree/v0.50.x).
+
 # `{Module Name}`
 
 Overview of the module.

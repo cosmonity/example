@@ -1,6 +1,6 @@
 package example
 
-import "cosmossdk.io/errors"
+import "cosmossdk.io/errors/v2"
 
 var (
 	// ErrDuplicateAddress error if there is a duplicate address

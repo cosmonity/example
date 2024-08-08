@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package cosmosregistry.example.module.v1;
 
+option go_package = "github.com/cosmosregistry/example";
+
 import "cosmos/app/v1alpha1/module.proto";
 
 // Module is the app config object of the module.

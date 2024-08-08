@@ -5,6 +5,7 @@ import (
 
 	storetypes "cosmossdk.io/store/types"
 	addresscodec "github.com/cosmos/cosmos-sdk/codec/address"
+	codectestutil "github.com/cosmos/cosmos-sdk/codec/testutil"
 	"github.com/cosmos/cosmos-sdk/runtime"
 	"github.com/cosmos/cosmos-sdk/testutil"
 	simtestutil "github.com/cosmos/cosmos-sdk/testutil/sims"
@@ -25,7 +26,7 @@ type testFixture struct {
 }
 
 func initFixture(t *testing.T) *testFixture {
-	encCfg := moduletestutil.MakeTestEncodingConfig()
+	encCfg := moduletestutil.MakeTestEncodingConfig(codectestutil.CodecOptions{})
 	key := storetypes.NewKVStoreKey(example.ModuleName)
 	testCtx := testutil.DefaultContextWithDB(t, key, storetypes.NewTransientStoreKey("transient_test"))
 	storeService := runtime.NewKVStoreService(key)

@@ -2,14 +2,14 @@ package module
 
 import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
-	examplev1 "github.com/cosmosregistry/example/api/v1"
+	example "github.com/cosmosregistry/example"
 )
 
 // AutoCLIOptions implements the autocli.HasAutoCLIConfig interface.
 func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 	return &autocliv1.ModuleOptions{
 		Query: &autocliv1.ServiceCommandDescriptor{
-			Service: examplev1.Query_ServiceDesc.ServiceName,
+			Service: example.Query_serviceDesc.ServiceName,
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
 					RpcMethod: "Counter",
@@ -27,7 +27,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			},
 		},
 		Tx: &autocliv1.ServiceCommandDescriptor{
-			Service: examplev1.Msg_ServiceDesc.ServiceName,
+			Service: example.Msg_serviceDesc.ServiceName,
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
 					RpcMethod: "IncrementCounter",

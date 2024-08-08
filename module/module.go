@@ -5,23 +5,25 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"cosmossdk.io/core/appmodule"
+	"cosmossdk.io/core/appmodule/v2"
+	"cosmossdk.io/core/legacy"
+	"cosmossdk.io/core/registry"
 	gwruntime "github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"google.golang.org/grpc"
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
-	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/types/module"
 
 	"github.com/cosmosregistry/example"
 	"github.com/cosmosregistry/example/keeper"
 )
 
 var (
-	_ module.AppModuleBasic = AppModule{}
-	_ module.HasGenesis     = AppModule{}
-	_ appmodule.AppModule   = AppModule{}
+	_ appmodule.HasGenesis            = AppModule{}
+	_ appmodule.AppModule             = AppModule{}
+	_ appmodule.HasRegisterInterfaces = AppModule{}
+	_ appmodule.HasConsensusVersion   = AppModule{}
+	_ appmodule.HasMigrations         = AppModule{}
 )
 
 // ConsensusVersion defines the current module consensus version.
@@ -40,16 +42,9 @@ func NewAppModule(cdc codec.Codec, keeper keeper.Keeper) AppModule {
 	}
 }
 
-func NewAppModuleBasic(m AppModule) module.AppModuleBasic {
-	return module.CoreAppModuleBasicAdaptor(m.Name(), m)
-}
-
-// Name returns the example module's name.
-func (AppModule) Name() string { return example.ModuleName }
-
 // RegisterLegacyAminoCodec registers the example module's types on the LegacyAmino codec.
 // New modules do not need to support Amino.
-func (AppModule) RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {}
+func (AppModule) RegisterLegacyAminoCodec(legacy.Amino) {}
 
 // RegisterGRPCGatewayRoutes registers the gRPC Gateway routes for the example module.
 func (AppModule) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *gwruntime.ServeMux) {
@@ -59,34 +54,38 @@ func (AppModule) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *gwrunt
 }
 
 // RegisterInterfaces registers interfaces and implementations of the example module.
-func (AppModule) RegisterInterfaces(registry codectypes.InterfaceRegistry) {
-	example.RegisterInterfaces(registry)
+func (AppModule) RegisterInterfaces(registrar registry.InterfaceRegistrar) {
+	example.RegisterInterfaces(registrar)
 }
 
 // ConsensusVersion implements AppModule/ConsensusVersion.
 func (AppModule) ConsensusVersion() uint64 { return ConsensusVersion }
 
 // RegisterServices registers a gRPC query service to respond to the module-specific gRPC queries.
-func (am AppModule) RegisterServices(cfg module.Configurator) {
-	example.RegisterMsgServer(cfg.MsgServer(), keeper.NewMsgServerImpl(am.keeper))
-	example.RegisterQueryServer(cfg.QueryServer(), keeper.NewQueryServerImpl(am.keeper))
+func (am AppModule) RegisterServices(registrar grpc.ServiceRegistrar) {
+	example.RegisterMsgServer(registrar, keeper.NewMsgServerImpl(am.keeper))
+	example.RegisterQueryServer(registrar, keeper.NewQueryServerImpl(am.keeper))
+}
 
-	// Register in place module state migration migrations
+// RegisterMigrations registers in place module state migration migrations
+func (am AppModule) RegisterMigrations(mr appmodule.MigrationRegistrar) error {
 	// m := keeper.NewMigrator(am.keeper)
-	// if err := cfg.RegisterMigration(example.ModuleName, 1, m.Migrate1to2); err != nil {
-	// 	panic(fmt.Sprintf("failed to migrate x/%s from version 1 to 2: %v", example.ModuleName, err))
+	// if err := mr.Register(example.ModuleName, 1, m.Migrate1to2); err != nil {
+	// 	return fmt.Errorf("failed to migrate x/%s from version 1 to 2: %v", example.ModuleName, err)
 	// }
+
+	return nil
 }
 
 // DefaultGenesis returns default genesis state as raw bytes for the module.
-func (AppModule) DefaultGenesis(cdc codec.JSONCodec) json.RawMessage {
-	return cdc.MustMarshalJSON(example.NewGenesisState())
+func (am AppModule) DefaultGenesis() json.RawMessage {
+	return am.cdc.MustMarshalJSON(example.NewGenesisState())
 }
 
 // ValidateGenesis performs genesis state validation for the circuit module.
-func (AppModule) ValidateGenesis(cdc codec.JSONCodec, _ client.TxEncodingConfig, bz json.RawMessage) error {
+func (am AppModule) ValidateGenesis(bz json.RawMessage) error {
 	var data example.GenesisState
-	if err := cdc.UnmarshalJSON(bz, &data); err != nil {
+	if err := am.cdc.UnmarshalJSON(bz, &data); err != nil {
 		return fmt.Errorf("failed to unmarshal %s genesis state: %w", example.ModuleName, err)
 	}
 
@@ -95,22 +94,26 @@ func (AppModule) ValidateGenesis(cdc codec.JSONCodec, _ client.TxEncodingConfig,
 
 // InitGenesis performs genesis initialization for the example module.
 // It returns no validator updates.
-func (am AppModule) InitGenesis(ctx sdk.Context, cdc codec.JSONCodec, data json.RawMessage) {
+func (am AppModule) InitGenesis(ctx context.Context, data json.RawMessage) error {
 	var genesisState example.GenesisState
-	cdc.MustUnmarshalJSON(data, &genesisState)
+	if err := am.cdc.UnmarshalJSON(data, &genesisState); err != nil {
+		return fmt.Errorf("failed to unmarshal %s genesis state: %w", example.ModuleName, err)
+	}
 
 	if err := am.keeper.InitGenesis(ctx, &genesisState); err != nil {
-		panic(fmt.Sprintf("failed to initialize %s genesis state: %v", example.ModuleName, err))
+		return fmt.Errorf("failed to initialize %s genesis state: %v", example.ModuleName, err)
 	}
+
+	return nil
 }
 
 // ExportGenesis returns the exported genesis state as raw bytes for the circuit
 // module.
-func (am AppModule) ExportGenesis(ctx sdk.Context, cdc codec.JSONCodec) json.RawMessage {
+func (am AppModule) ExportGenesis(ctx context.Context) (json.RawMessage, error) {
 	gs, err := am.keeper.ExportGenesis(ctx)
 	if err != nil {
-		panic(fmt.Sprintf("failed to export %s genesis state: %v", example.ModuleName, err))
+		return nil, fmt.Errorf("failed to export %s genesis state: %v", example.ModuleName, err)
 	}
 
-	return cdc.MustMarshalJSON(gs)
+	return am.cdc.MarshalJSON(gs)
 }

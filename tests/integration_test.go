@@ -6,24 +6,24 @@ import (
 	"github.com/stretchr/testify/require"
 
 	// blank import for app wiring registration
-	_ "github.com/cosmos/cosmos-sdk/x/auth"
-	_ "github.com/cosmos/cosmos-sdk/x/auth/tx/config"
-	_ "github.com/cosmos/cosmos-sdk/x/bank"
-	_ "github.com/cosmos/cosmos-sdk/x/consensus"
+	_ "cosmossdk.io/x/accounts"
+	_ "cosmossdk.io/x/auth"
+	_ "cosmossdk.io/x/auth/tx/config"
+	_ "cosmossdk.io/x/bank"
+	_ "cosmossdk.io/x/consensus"
+	_ "cosmossdk.io/x/mint"
+	_ "cosmossdk.io/x/staking"
 	_ "github.com/cosmos/cosmos-sdk/x/genutil"
-	_ "github.com/cosmos/cosmos-sdk/x/mint"
-	_ "github.com/cosmos/cosmos-sdk/x/staking"
 	_ "github.com/cosmosregistry/example/module"
 
 	appv1alpha1 "cosmossdk.io/api/cosmos/app/v1alpha1"
-	"cosmossdk.io/core/appconfig"
 	"cosmossdk.io/depinject"
+	"cosmossdk.io/depinject/appconfig"
 	"cosmossdk.io/log"
 	"github.com/cosmos/cosmos-sdk/testutil/configurator"
 	simtestutil "github.com/cosmos/cosmos-sdk/testutil/sims"
 
 	"github.com/cosmosregistry/example"
-	examplemodulev1 "github.com/cosmosregistry/example/api/module/v1"
 	"github.com/cosmosregistry/example/keeper"
 )
 
@@ -32,7 +32,7 @@ var ExampleModule = func() configurator.ModuleOption {
 	return func(config *configurator.Config) {
 		config.ModuleConfigs[example.ModuleName] = &appv1alpha1.ModuleConfig{
 			Name:   example.ModuleName,
-			Config: appconfig.WrapAny(&examplemodulev1.Module{}),
+			Config: appconfig.WrapAny(&example.Module{}),
 		}
 	}
 }
@@ -50,8 +50,10 @@ func TestIntegration(t *testing.T) {
 			configurator.ConsensusModule(),
 			configurator.GenutilModule(),
 			configurator.MintModule(),
+			configurator.AccountsModule(),
 			ExampleModule(),
 			configurator.WithCustomInitGenesisOrder(
+				"accounts",
 				"auth",
 				"bank",
 				"staking",
