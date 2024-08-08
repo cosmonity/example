@@ -8,6 +8,7 @@ toolchain go1.22.5
 replace (
 	cosmossdk.io/api => cosmossdk.io/api v0.7.3-0.20240807085307-5a08833386eb
 	cosmossdk.io/x/auth => cosmossdk.io/x/auth v0.0.0-20240807083226-4f5c319459f3
+	cosmossdk.io/x/bank => cosmossdk.io/x/bank v0.0.0-20240807083226-4f5c319459f3
 	cosmossdk.io/x/consensus => cosmossdk.io/x/consensus v0.0.0-20240807083226-4f5c319459f3
 	cosmossdk.io/x/staking => cosmossdk.io/x/staking v0.0.0-20240807083226-4f5c319459f3
 	github.com/cosmos/cosmos-sdk => github.com/cosmos/cosmos-sdk v0.46.0-beta2.0.20240808151044-b0ab3aaac4dd
