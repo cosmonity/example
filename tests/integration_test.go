@@ -24,7 +24,6 @@ import (
 	simtestutil "github.com/cosmos/cosmos-sdk/testutil/sims"
 
 	"github.com/cosmosregistry/example"
-	examplemodulev1 "github.com/cosmosregistry/example/api/module/v1"
 	"github.com/cosmosregistry/example/keeper"
 )
 
@@ -33,7 +32,7 @@ var ExampleModule = func() configurator.ModuleOption {
 	return func(config *configurator.Config) {
 		config.ModuleConfigs[example.ModuleName] = &appv1alpha1.ModuleConfig{
 			Name:   example.ModuleName,
-			Config: appconfig.WrapAny(&examplemodulev1.Module{}),
+			Config: appconfig.WrapAny(&example.Module{}),
 		}
 	}
 }

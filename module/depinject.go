@@ -10,7 +10,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdkaddress "github.com/cosmos/cosmos-sdk/types/address"
 
-	modulev1 "github.com/cosmosregistry/example/api/module/v1"
+	"github.com/cosmosregistry/example"
 	"github.com/cosmosregistry/example/keeper"
 )
 
@@ -24,7 +24,7 @@ func (am AppModule) IsAppModule() {}
 
 func init() {
 	appconfig.Register(
-		&modulev1.Module{},
+		&example.Module{},
 		appconfig.Provide(ProvideModule),
 	)
 }
@@ -36,7 +36,7 @@ type ModuleInputs struct {
 	StoreService store.KVStoreService
 	AddressCodec address.Codec
 
-	Config *modulev1.Module
+	Config *example.Module
 }
 
 type ModuleOutputs struct {
