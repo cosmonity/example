@@ -5,8 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"cosmossdk.io/core/appmodule/v2"
-	"cosmossdk.io/core/legacy"
+	appmodulev2 "cosmossdk.io/core/appmodule/v2"
 	"cosmossdk.io/core/registry"
 	gwruntime "github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
@@ -19,11 +18,11 @@ import (
 )
 
 var (
-	_ appmodule.HasGenesis            = AppModule{}
-	_ appmodule.AppModule             = AppModule{}
-	_ appmodule.HasRegisterInterfaces = AppModule{}
-	_ appmodule.HasConsensusVersion   = AppModule{}
-	_ appmodule.HasMigrations         = AppModule{}
+	_ appmodulev2.HasGenesis            = AppModule{}
+	_ appmodulev2.AppModule             = AppModule{}
+	_ appmodulev2.HasRegisterInterfaces = AppModule{}
+	_ appmodulev2.HasConsensusVersion   = AppModule{}
+	_ appmodulev2.HasMigrations         = AppModule{}
 )
 
 // ConsensusVersion defines the current module consensus version.
@@ -43,8 +42,7 @@ func NewAppModule(cdc codec.Codec, keeper keeper.Keeper) AppModule {
 }
 
 // RegisterLegacyAminoCodec registers the example module's types on the LegacyAmino codec.
-// New modules do not need to support Amino.
-func (AppModule) RegisterLegacyAminoCodec(legacy.Amino) {}
+func (AppModule) RegisterLegacyAminoCodec(registry.AminoRegistrar) {}
 
 // RegisterGRPCGatewayRoutes registers the gRPC Gateway routes for the example module.
 func (AppModule) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *gwruntime.ServeMux) {
@@ -68,7 +66,7 @@ func (am AppModule) RegisterServices(registrar grpc.ServiceRegistrar) {
 }
 
 // RegisterMigrations registers in place module state migration migrations
-func (am AppModule) RegisterMigrations(mr appmodule.MigrationRegistrar) error {
+func (am AppModule) RegisterMigrations(mr appmodulev2.MigrationRegistrar) error {
 	// m := keeper.NewMigrator(am.keeper)
 	// if err := mr.Register(example.ModuleName, 1, m.Migrate1to2); err != nil {
 	// 	return fmt.Errorf("failed to migrate x/%s from version 1 to 2: %v", example.ModuleName, err)
