@@ -16,7 +16,7 @@ require (
 	cosmossdk.io/api v0.8.0 // main
 	cosmossdk.io/collections v0.4.1-0.20240802064046-23fac2f1b8ab // main
 	cosmossdk.io/core v1.0.0-alpha.5 // main
-	cosmossdk.io/depinject v1.0.0
+	cosmossdk.io/depinject v1.1.0
 	cosmossdk.io/errors v1.0.1 // indirect
 	cosmossdk.io/errors/v2 v2.0.0-20240808151044-b0ab3aaac4dd
 	cosmossdk.io/store v1.1.1-0.20240909133312-50288938d1b6
@@ -28,7 +28,7 @@ require (
 	github.com/stretchr/testify v1.9.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20240814211410-ddb44dafa142
 	google.golang.org/grpc v1.67.1
-	google.golang.org/protobuf v1.34.2 // indirect
+	google.golang.org/protobuf v1.35.1 // indirect
 )
 
 require (
