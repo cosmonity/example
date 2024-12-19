@@ -17,7 +17,7 @@ require (
 	cosmossdk.io/core v1.0.0-alpha.6 // main
 	cosmossdk.io/depinject v1.1.0
 	cosmossdk.io/errors v1.0.1 // indirect
-	cosmossdk.io/errors/v2 v2.0.0-20240808151044-b0ab3aaac4dd
+	cosmossdk.io/errors/v2 v2.0.0
 	cosmossdk.io/store v1.10.0-rc.1
 	github.com/cosmos/cosmos-proto v1.0.0-beta.5
 	github.com/cosmos/cosmos-sdk v0.52.0
