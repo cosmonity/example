@@ -1,4 +1,4 @@
-module github.com/cosmosregistry/example
+module github.com/cosmonity/example
 
 go 1.23.4
 

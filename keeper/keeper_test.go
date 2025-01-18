@@ -12,8 +12,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	moduletestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
 
-	"github.com/cosmosregistry/example"
-	"github.com/cosmosregistry/example/keeper"
+	"github.com/cosmonity/example"
+	"github.com/cosmonity/example/keeper"
 )
 
 type testFixture struct {

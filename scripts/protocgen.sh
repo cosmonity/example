@@ -13,5 +13,5 @@ done
 
 cd ..
 
-cp -r github.com/cosmosregistry/example/* ./
-rm -rf github.com cosmosregistry
+cp -r github.com/cosmonity/example/* ./
+rm -rf github.com cosmonity

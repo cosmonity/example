@@ -3,7 +3,7 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/cosmosregistry/example"
+	"github.com/cosmonity/example"
 	"github.com/stretchr/testify/require"
 )
 

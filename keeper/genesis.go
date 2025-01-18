@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"github.com/cosmosregistry/example"
+	"github.com/cosmonity/example"
 )
 
 // InitGenesis initializes the module state from a genesis state.

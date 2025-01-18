@@ -23,27 +23,27 @@ find . -type f -name "*.pulsar.go" -delete
 # rename module and imports
 go mod edit -module github.com/$MODULE_NAME
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    find . -not -path './.*' -type f -exec sed -i -e "s,cosmosregistry/example,$MODULE_NAME,g" {} \;
-    find . -name '*.proto' -type f -exec sed -i -e "s,cosmosregistry.example,$(echo "$MODULE_NAME" | tr '/' '.'),g" {} \;
-    find . -name 'protocgen.sh' -type f -exec sed -i -e "s,rm -rf github.com cosmosregistry,rm -rf github.com $USERNAME,g" {} \;
+    find . -not -path './.*' -type f -exec sed -i -e "s,cosmonity/example,$MODULE_NAME,g" {} \;
+    find . -name '*.proto' -type f -exec sed -i -e "s,cosmonity.example,$(echo "$MODULE_NAME" | tr '/' '.'),g" {} \;
+    find . -name 'protocgen.sh' -type f -exec sed -i -e "s,rm -rf github.com cosmonity,rm -rf github.com $USERNAME,g" {} \;
     find . -not -path './.*' -type f -exec sed -i -e "s,example,$REPO,g" {} \;
 else
-    find . -not -path './.*' -type f -exec sed -i '' -e "s,cosmosregistry/example,$MODULE_NAME,g" {} \;
-    find . -name '*.proto' -type f -exec sed -i '' -e "s,cosmosregistry.example,$(echo "$MODULE_NAME" | tr '/' '.'),g" {} \;
-    find . -name 'protocgen.sh' -type f -exec sed -i '' -e "s,rm -rf github.com cosmosregistry,rm -rf github.com $USERNAME,g" {} \;
+    find . -not -path './.*' -type f -exec sed -i '' -e "s,cosmonity/example,$MODULE_NAME,g" {} \;
+    find . -name '*.proto' -type f -exec sed -i '' -e "s,cosmonity.example,$(echo "$MODULE_NAME" | tr '/' '.'),g" {} \;
+    find . -name 'protocgen.sh' -type f -exec sed -i '' -e "s,rm -rf github.com cosmonity,rm -rf github.com $USERNAME,g" {} \;
     find . -not -path './.*' -type f -exec sed -i '' -e "s,example,$REPO,g" {} \;
 fi
 
 # rename directory
 mkdir -p proto/$MODULE_NAME
-mv proto/cosmosregistry/example/* proto/$MODULE_NAME
-rm -rf proto/cosmosregistry
+mv proto/cosmonity/example/* proto/$MODULE_NAME
+rm -rf proto/cosmonity
 
 # re-generate protos
 make proto-gen
 
 # credits
-echo "# This Cosmos SDK module was generated using <https://github.com/cosmosregistry/example>" > THANKS.md
+echo "# This Cosmos SDK module was generated using <https://github.com/cosmonity/example>" > THANKS.md
 
 # removes itself
 rm scripts/rename.sh

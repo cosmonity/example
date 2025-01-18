@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"cosmossdk.io/collections"
-	"github.com/cosmosregistry/example"
+	"github.com/cosmonity/example"
 )
 
 type msgServer struct {

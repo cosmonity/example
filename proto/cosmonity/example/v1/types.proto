@@ -1,19 +1,19 @@
 syntax = "proto3";
-package cosmosregistry.example.v1;
+package cosmonity.example.v1;
 
-option go_package = "github.com/cosmosregistry/example";
+option go_package = "github.com/cosmonity/example";
 
 import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
 import "amino/amino.proto";
 
 // Params defines the parameters of the module.
-message Params { option (amino.name) = "cosmosregistry/example/Params"; }
+message Params { option (amino.name) = "cosmonity/example/Params"; }
 
 // Counter defines a counter object.
 // It is used only for genesis purposes. Collections does not need to use it.
 message Counter {
-  option (amino.name) = "cosmosregistry/example/Counter";
+  option (amino.name) = "cosmonity/example/Counter";
 
   // count defines the count of the counter.
   uint64 count = 1;

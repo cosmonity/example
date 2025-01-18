@@ -10,8 +10,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdkaddress "github.com/cosmos/cosmos-sdk/types/address"
 
-	"github.com/cosmosregistry/example"
-	"github.com/cosmosregistry/example/keeper"
+	"github.com/cosmonity/example"
+	"github.com/cosmonity/example/keeper"
 )
 
 var _ appmodule.AppModule = AppModule{}
