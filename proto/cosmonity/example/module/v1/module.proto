@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package cosmonity.example.module.v1;
 
-option go_package = "github.com/cosmonity/example";
+option go_package = "go.cosmonity.xyz/example";
 
 import "cosmos/app/v1alpha1/module.proto";
 
@@ -10,7 +10,7 @@ import "cosmos/app/v1alpha1/module.proto";
 // Learn more: https://docs.cosmos.network/main/building-modules/depinject
 message Module {
   option (cosmos.app.v1alpha1.module) = {
-    go_import : "github.com/cosmonity/example"
+    go_import : "go.cosmonity.xyz/example"
   };
 
   // authority defines the custom module authority.

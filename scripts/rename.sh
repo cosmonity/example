@@ -43,7 +43,7 @@ rm -rf proto/cosmonity
 make proto-gen
 
 # credits
-echo "# This Cosmos SDK module was generated using <https://github.com/cosmonity/example>" > THANKS.md
+echo "# This Cosmos SDK module was generated using <https://go.cosmonity.xyz/example>" > THANKS.md
 
 # removes itself
 rm scripts/rename.sh

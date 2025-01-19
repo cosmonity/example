@@ -9,8 +9,8 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/cosmonity/example"
 	"github.com/cosmos/cosmos-sdk/types/query"
+	"go.cosmonity.xyz/example"
 )
 
 var _ example.QueryServer = queryServer{}

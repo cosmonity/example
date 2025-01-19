@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"cosmossdk.io/collections"
-	"github.com/cosmonity/example"
+	"go.cosmonity.xyz/example"
 )
 
 type msgServer struct {

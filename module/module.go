@@ -13,8 +13,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 
-	"github.com/cosmonity/example"
-	"github.com/cosmonity/example/keeper"
+	"go.cosmonity.xyz/example"
+	"go.cosmonity.xyz/example/keeper"
 )
 
 var (

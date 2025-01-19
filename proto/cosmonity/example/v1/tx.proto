@@ -1,7 +1,7 @@
 syntax = "proto3";
 package cosmonity.example.v1;
 
-option go_package = "github.com/cosmonity/example";
+option go_package = "go.cosmonity.xyz/example";
 
 import "cosmos/msg/v1/msg.proto";
 import "gogoproto/gogo.proto";

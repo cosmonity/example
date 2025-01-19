@@ -1,4 +1,4 @@
-module github.com/cosmonity/example
+module go.cosmonity.xyz/example
 
 go 1.23.4
 

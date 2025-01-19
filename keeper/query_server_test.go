@@ -3,9 +3,9 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/cosmonity/example"
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/stretchr/testify/require"
+	"go.cosmonity.xyz/example"
 )
 
 func TestQueryParams(t *testing.T) {

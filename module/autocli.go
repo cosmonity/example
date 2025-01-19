@@ -2,7 +2,7 @@ package module
 
 import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
-	example "github.com/cosmonity/example"
+	example "go.cosmonity.xyz/example"
 )
 
 // AutoCLIOptions implements the autocli.HasAutoCLIConfig interface.

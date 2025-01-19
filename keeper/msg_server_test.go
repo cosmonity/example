@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/cosmonity/example"
 	"github.com/stretchr/testify/require"
+	"go.cosmonity.xyz/example"
 )
 
 func TestUpdateParams(t *testing.T) {

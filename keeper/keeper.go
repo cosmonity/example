@@ -8,7 +8,7 @@ import (
 	storetypes "cosmossdk.io/core/store"
 	"github.com/cosmos/cosmos-sdk/codec"
 
-	"github.com/cosmonity/example"
+	"go.cosmonity.xyz/example"
 )
 
 type Keeper struct {

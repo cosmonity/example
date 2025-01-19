@@ -3,8 +3,8 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/cosmonity/example"
 	"github.com/stretchr/testify/require"
+	"go.cosmonity.xyz/example"
 )
 
 func TestInitGenesis(t *testing.T) {
