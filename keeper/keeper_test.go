@@ -1,6 +1,7 @@
 package keeper_test
 
 import (
+	"context"
 	"testing"
 
 	storetypes "cosmossdk.io/store/types"
@@ -17,7 +18,7 @@ import (
 )
 
 type testFixture struct {
-	ctx         sdk.Context
+	ctx         context.Context
 	k           keeper.Keeper
 	msgServer   example.MsgServer
 	queryServer example.QueryServer

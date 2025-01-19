@@ -6,12 +6,9 @@ import (
 	"fmt"
 
 	appmodulev2 "cosmossdk.io/core/appmodule/v2"
+	"cosmossdk.io/core/codec"
 	"cosmossdk.io/core/registry"
-	gwruntime "github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
-
-	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/cosmos/cosmos-sdk/codec"
 
 	"go.cosmonity.xyz/example"
 	"go.cosmonity.xyz/example/keeper"
@@ -44,13 +41,6 @@ func NewAppModule(cdc codec.Codec, keeper keeper.Keeper) AppModule {
 // RegisterLegacyAminoCodec registers the example module's types on the LegacyAmino codec.
 func (AppModule) RegisterLegacyAminoCodec(registry.AminoRegistrar) {}
 
-// RegisterGRPCGatewayRoutes registers the gRPC Gateway routes for the example module.
-func (AppModule) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *gwruntime.ServeMux) {
-	if err := example.RegisterQueryHandlerClient(context.Background(), mux, example.NewQueryClient(clientCtx)); err != nil {
-		panic(err)
-	}
-}
-
 // RegisterInterfaces registers interfaces and implementations of the example module.
 func (AppModule) RegisterInterfaces(registrar registry.InterfaceRegistrar) {
 	example.RegisterInterfaces(registrar)
@@ -77,7 +67,12 @@ func (am AppModule) RegisterMigrations(mr appmodulev2.MigrationRegistrar) error 
 
 // DefaultGenesis returns default genesis state as raw bytes for the module.
 func (am AppModule) DefaultGenesis() json.RawMessage {
-	return am.cdc.MustMarshalJSON(example.NewGenesisState())
+	genesis, err := am.cdc.MarshalJSON(example.NewGenesisState())
+	if err != nil {
+		panic(fmt.Errorf("failed to marshal default %s genesis state: %v", example.ModuleName, err))
+	}
+
+	return genesis
 }
 
 // ValidateGenesis performs genesis state validation for the circuit module.

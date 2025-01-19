@@ -4,9 +4,10 @@ import (
 	"fmt"
 
 	"cosmossdk.io/collections"
+	"cosmossdk.io/collections/protocodec"
 	"cosmossdk.io/core/address"
+	"cosmossdk.io/core/codec"
 	storetypes "cosmossdk.io/core/store"
-	"github.com/cosmos/cosmos-sdk/codec"
 
 	"go.cosmonity.xyz/example"
 )
@@ -36,7 +37,7 @@ func NewKeeper(cdc codec.BinaryCodec, addressCodec address.Codec, storeService s
 		cdc:          cdc,
 		addressCodec: addressCodec,
 		authority:    authority,
-		Params:       collections.NewItem(sb, example.ParamsKey, "params", codec.CollValue[example.Params](cdc)),
+		Params:       collections.NewItem(sb, example.ParamsKey, "params", protocodec.CollValue[example.Params](cdc)),
 		Counter:      collections.NewMap(sb, example.CounterKey, "counter", collections.StringKey, collections.Uint64Value),
 	}
 
