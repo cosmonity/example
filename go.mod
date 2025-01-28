@@ -7,7 +7,7 @@ replace github.com/cosmos/cosmos-sdk => github.com/cosmos/cosmos-sdk v0.52.0-rc.
 
 require (
 	cosmossdk.io/api v0.8.2 // main
-	cosmossdk.io/collections v1.0.0 // main
+	cosmossdk.io/collections v1.1.0 // main
 	cosmossdk.io/core v1.0.0 // main
 	cosmossdk.io/depinject v1.1.0
 	cosmossdk.io/errors v1.0.1 // indirect
@@ -23,8 +23,6 @@ require (
 	google.golang.org/grpc v1.70.0
 	google.golang.org/protobuf v1.36.4 // indirect
 )
-
-require cosmossdk.io/collections/protocodec v0.0.2
 
 require (
 	buf.build/gen/go/cometbft/cometbft/protocolbuffers/go v1.36.3-20241120201313-68e42a58b301.1 // indirect
